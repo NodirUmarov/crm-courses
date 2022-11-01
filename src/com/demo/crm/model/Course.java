@@ -3,12 +3,12 @@ package com.demo.crm.model;
 public class Course extends BaseModel {
 
     private String courseName;
-    private CourseType courseType;
+    private String courseType;
 
     public Course() {
     }
 
-    public Course(Long id, String courseName, CourseType courseType) {
+    public Course(Long id, String courseName, String courseType) {
         super(id);
         this.courseName = courseName;
         this.courseType = courseType;
@@ -22,11 +22,11 @@ public class Course extends BaseModel {
         this.courseName = courseName;
     }
 
-    public CourseType getCourseType() {
+    public String getCourseType() {
         return courseType;
     }
 
-    public void setCourseType(CourseType courseType) {
+    public void setCourseType(String courseType) {
         this.courseType = courseType;
     }
 
