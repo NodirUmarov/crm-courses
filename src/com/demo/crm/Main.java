@@ -39,8 +39,8 @@ public class Main {
                 .append("Enter 4 to print list of Course\n")
                 .append("Enter 5 to print list of Mentors\n")
                 .append("Enter 6 to get student by id\n")
-                .append("Enter 0 o EXIT").toString());
-        System.out.println("Please, enter number between 1 and 6 of 0 to exit");
+                .append("Enter 0 to EXIT").toString());
+        System.out.println("Please, enter number between 0 to 6");
 
         value = scanner.nextInt();
 
