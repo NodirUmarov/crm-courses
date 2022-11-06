@@ -14,8 +14,11 @@ public class CourseType extends BaseModel {
     private Boolean isOffline;
     private CourseFormats format;
 
+    public CourseType() {
 
-    public CourseType(Long id, String typeName, Integer durationOfCourse, LocalTime durationOfLesson, Integer lessonsPerWeek, Double pricePerMonth, Boolean isOffline, CourseFormats format) {
+    }
+    public CourseType(Long id, String typeName, Integer durationOfCourse, LocalTime durationOfLesson,
+                      Integer lessonsPerWeek, Double pricePerMonth, Boolean isOffline, CourseFormats format) {
         super(id);
         this.typeName = typeName;
         this.durationOfCourse = durationOfCourse;

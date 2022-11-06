@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static sun.misc.Version.print;
+
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
@@ -21,7 +23,7 @@ public class Main {
     private static CourseService courseService = new CourseService();
     private static MentorService mentorService = new MentorService();
     private static StudentService studentService = new StudentService();
-    private static int value = 7;
+    private static int value = 10;
 
     public static void main(String[] args) {
         while (value != 0) {
@@ -29,38 +31,89 @@ public class Main {
         }
 
     }
-
     public static void run() {
         System.out.println();
         System.out.println(new StringBuilder()
-                .append("Enter 1 to create Course\n")
-                .append("Enter 2 to create Mentor\n")
-                .append("Enter 3 to create Student\n")
-                .append("Enter 4 to print list of Course\n")
-                .append("Enter 5 to print list of Mentors\n")
-                .append("Enter 6 to get student by id\n")
-                .append("Enter 0 o EXIT").toString());
-        System.out.println("Please, enter number between 1 and 6 of 0 to exit");
+                .append("Enter 1 to create Data\n")
+                .append("Enter 2 to print list of Data\n")
+                .append("Enter 3 to get Data by id\n")
+                .append("Enter 0 to EXIT").toString());
+        System.out.println("Please, enter number between 0 to 3");
 
         value = scanner.nextInt();
 
-        if (value == 1) {
-            courseCreate();
-        } else if (value == 2) {
-            mentorCreate();
-        } else if (value == 3) {
-            studentCreate();
-        } else if (value == 4) {
-            printCourseList();
-        } else if (value == 5) {
-            printMentorsList();
-        } else if (value == 6) {
-            getStudent();
-        } else if (value == 0) {
-            return;
+
+        switch (value) {
+            case 1:
+                System.out.println(new StringBuilder()
+                        .append("Enter 1 to create Course data\n")
+                        .append("Enter 2 to create Mentor data\n")
+                        .append("Enter 3 to create Student data\n")
+                        .append("Enter 4 to go back").toString());
+                value = scanner.nextInt();
+                switch (value) {
+                    case 1:
+                        courseCreate();
+                        break;
+                    case 2:
+                        mentorCreate();
+                        break;
+                    case 3:
+                        studentCreate();
+                        break;
+                    case 4:
+                        return;
+                }
+                break;
+            case 2:
+                System.out.println(new StringBuilder()
+                        .append("Enter 1 to print Course list\n")
+                        .append("Enter 2 to print Mentor list\n")
+                        .append("Enter 3 to print Student list\n")
+                        .append("Enter 4 to go back").toString());
+                value = scanner.nextInt();
+                switch (value) {
+                    case 1:
+                        printCourseList();
+                        break;
+                    case 2:
+                        printMentorsList();
+                        break;
+                    case 3:
+                        printStudentsList();
+                        break;
+                    case 4:
+                        return;
+                }
+                break;
+            case 3:
+                System.out.println(new StringBuilder()
+                        .append("Enter 1 to find Course by id\n")
+                        .append("Enter 2 to find Mentor by id\n")
+                        .append("Enter 3 to find Student by id\n")
+                        .append("Enter 4 to go back").toString());
+                value = scanner.nextInt();
+                switch (value) {
+                    case 1:
+                        getCourse();
+                        break;
+                    case 2:
+                        getMentor();
+                        break;
+                    case 3:
+                        getStudent();
+                        break;
+                    case 4:
+                        return;
+                }
+                break;
+            case 0:
+                return;
+            default:
+                System.out.println("Please enter given number: ");
+                break;
         }
     }
-
     public static void courseCreate() {
         Course course = courseService.create();
         listOfCourse.add(course);
@@ -95,9 +148,26 @@ public class Main {
     }
 
     public static void getStudent() {
-        System.out.print("Enter student id: ");
+        System.out.print("Enter Student id: ");
         long id = scanner.nextLong();
         System.out.println(studentService.find(id));
+
     }
+
+    public static void getMentor() {
+        System.out.print("Enter Mentor id: ");
+        long id = scanner.nextLong();
+        System.out.println(mentorService.find(id));
+
+    }
+
+    public static void getCourse() {
+        System.out.print("Enter Course id: ");
+        long id = scanner.nextLong();
+        System.out.println(courseService.find(id));
+
+    }
+
+
 
 }

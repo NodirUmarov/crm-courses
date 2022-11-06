@@ -5,4 +5,5 @@ import com.demo.crm.model.Student;
 public interface StudentDao {
     public Student save(Student student);
     public Student find(Long id);
+
 }
