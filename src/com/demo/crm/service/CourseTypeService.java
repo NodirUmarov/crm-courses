@@ -1,5 +1,7 @@
 package com.demo.crm.service;
 
+import com.demo.crm.dao.CourseTypeDao;
+import com.demo.crm.dao.impl.CourseTypeDaoImplFile;
 import com.demo.crm.model.CourseType;
 import com.demo.crm.model.builder.CourseTypeBuilder;
 import com.demo.crm.model.enums.CourseFormats;
@@ -11,6 +13,7 @@ import java.util.Scanner;
 public class CourseTypeService {
     private Scanner scanner;
     private static Long idCounter;
+    private CourseTypeDao courseTypeDao;
 
     static {
         idCounter = 0L;
@@ -18,6 +21,7 @@ public class CourseTypeService {
 
    public CourseTypeService() {
         this.scanner = new Scanner(System.in);
+        this.courseTypeDao = new CourseTypeDaoImplFile();
    }
 
    public CourseType create() {
@@ -27,7 +31,7 @@ public class CourseTypeService {
        System.out.print("Course type name: ");
        String typeName = scanner.nextLine();
 
-       System.out.print("Duration fo course: ");
+       System.out.print("Duration of course: ");
        Integer durationOfCourse = Integer.parseInt(scanner.nextLine());
 
        System.out.print("Duration of lesson (hour:minute): ");
@@ -36,7 +40,7 @@ public class CourseTypeService {
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm");
        LocalTime durationOfLesson = LocalTime.parse(durationOfLessonInString);
 
-       System.out.print("How match lessons per week: ");
+       System.out.print("How much lessons per week: ");
        Integer lessonsPerWeek = Integer.parseInt(scanner.nextLine());
 
        System.out.print("Price per month: ");
@@ -53,14 +57,14 @@ public class CourseTypeService {
                isOffLine = false;
            }
            System.out.println("You enter wrong type.");
-           System.out.print("Please, reenter course offline of online: ");
+           System.out.print("Please, enter right course type: ");
            isOffLineInString = scanner.nextLine();
        }
 
        System.out.print("Course format: ");
        CourseFormats format = CourseFormats.valueOf(scanner.nextLine().trim().toUpperCase());
 
-       return CourseTypeBuilder.builder()
+       return courseTypeDao.save(CourseTypeBuilder.builder()
                .id(++idCounter)
                .typeName(typeName)
                .durationOfCourse(durationOfCourse)
@@ -68,7 +72,9 @@ public class CourseTypeService {
                .lessonsPerWeek(lessonsPerWeek)
                .pricePerMonth(pricePerMonth)
                .isOffline(isOffLine)
-               .format(format).build();
+               .format(format).build());
 
    }
+
+
 }
